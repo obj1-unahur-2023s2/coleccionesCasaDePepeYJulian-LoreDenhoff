@@ -28,16 +28,8 @@ object cuentaCombinada {
 	method extraer (importe) {
 	var resto = (cuentaPrimaria.saldo() - importe).abs()
 	
-		if (importe <= cuentaPrimaria.saldo()){ 
-			cuentaPrimaria.extraer(importe)
+		if (importe <= cuentaPrimaria.saldo()) cuentaPrimaria.extraer(importe)	else cuentaSecundaria.extraer(resto) cuentaPrimaria.extraer(importe)
 
-		}
-		else {
-			console.println(resto)
-			cuentaSecundaria.extraer(resto)  
-			cuentaPrimaria.extraer(importe)
-		}
 	}
-	method saldo() = saldo
-	
+	method saldo() = saldo	
 }

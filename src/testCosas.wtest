@@ -1,0 +1,18 @@
+import cosas.*
+
+test "Precio de la computadora"{
+	dolar.precioDeVenta(500)
+	assert.equals(250000,computadora.precio())
+}
+
+test "pack de comida asado y cebolla"{
+	packComida.plato(tiraDeAsado)//3500
+	packComida.aderezo(cebolla) //250
+	assert.equals(3750,packComida.precio())
+}
+
+test "pack de comida milanesa con fideos"{
+	packComida.plato(milanesaRebozada)//2600
+	packComida.aderezo(paqueteDeFideos) //500
+	assert.equals(3100,packComida.precio())
+}

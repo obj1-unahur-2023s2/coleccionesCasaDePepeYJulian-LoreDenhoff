@@ -67,8 +67,8 @@ object computadora {
 }
 
 object packComida{
-	var property plato = 0
-	var property aderezo = 0
+	var property plato 
+	var property aderezo 
 	
 	method precio() = plato.precio() + aderezo.precio()
 	method esComida() = true 
