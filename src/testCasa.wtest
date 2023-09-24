@@ -1,0 +1,104 @@
+import casa.*
+import cosas.*
+
+describe "Test de cosas"{
+	test "Se verifica compran 3 cosas"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.equals(3,casaDePepeYJulian.cantidadDeCosasCompradas())
+	}
+	test "Se indica que se compró comida"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.that(casaDePepeYJulian.tieneComida())
+	}
+	test "Se indica que no se compró comida"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		assert.notThat(casaDePepeYJulian.tieneComida())
+	}
+	test "Lo último que se compró es un electrodomestico"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(plancha)
+		assert.that(casaDePepeYJulian.vieneDeEquiparse())
+	}
+	test "Lo último que se compró vale mas de 50000"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(cama)
+		assert.that(casaDePepeYJulian.vieneDeEquiparse())
+	}
+	test "Lo último que se compró no es un electrodomestico y no vale mas de 50000"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(paqueteDeFideos)
+		assert.notThat(casaDePepeYJulian.vieneDeEquiparse())
+	}
+	test "El monto totoal de lo que se compro es superior a 90000"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(cama)
+		assert.that(casaDePepeYJulian.esDerrochona())
+	}
+	test "El monto totoal de lo que se compro no es superior a 90000"{
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		casaDePepeYJulian.comprar(paqueteDeFideos)
+		casaDePepeYJulian.comprar(salsaDeTomate)
+		assert.notThat(casaDePepeYJulian.esDerrochona())
+	}	
+	test "Lo mas caro es la heladera"{
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		assert.equals(heladera,casaDePepeYJulian.compraMasCara())
+	}	
+	test "Una lista con los electrodemesticos comprados"{
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cebolla)
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(cama)
+		assert.equals([heladera,plancha],casaDePepeYJulian.electrodomesticosComprados())
+	}	
+	test "No todo lo que se compro es comida"{
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(cebolla)
+		casaDePepeYJulian.comprar(heladera)
+		casaDePepeYJulian.comprar(cama)
+		assert.notThat(casaDePepeYJulian.malaEpoca())
+	}	
+	test "Todo lo que se compro es comida"{
+		casaDePepeYJulian.comprar(cebolla)
+		casaDePepeYJulian.comprar(milanesaRebozada)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.that(casaDePepeYJulian.malaEpoca())
+	}
+	test "Cosas que faltan comprar"{
+		var faltan=[cebolla, heladera,milanesaRebozada,microondas]
+		casaDePepeYJulian.comprar(cebolla)
+		casaDePepeYJulian.comprar(milanesaRebozada)
+		assert.equals(#{heladera,microondas},casaDePepeYJulian.queFaltaComprar(faltan))
+	}
+	test "Se compraron dos o mas comidas"{
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(milanesaRebozada)
+		casaDePepeYJulian.comprar(tiraDeAsado)
+		assert.notThat(casaDePepeYJulian.faltaComida())
+	}
+	test "Se compraron una comida"{
+		casaDePepeYJulian.comprar(cama)
+		casaDePepeYJulian.comprar(plancha)
+		casaDePepeYJulian.comprar(milanesaRebozada)
+
+		assert.that(casaDePepeYJulian.faltaComida())
+	}	
+		
+}
+
+
+
+
+

@@ -1,0 +1,63 @@
+import cuentaBancaria.*
+
+
+describe "Cuenta corriente"{
+	
+	test "Si deposito 10000 saldo=10000"{
+		cuentaCorriente.depositar(10000)
+		assert.equals(10000,cuentaCorriente.saldo())
+	}
+	test "Si deposito 10000 y retiro 5000 saldo=5000"{
+		cuentaCorriente.depositar(10000)
+		cuentaCorriente.extraer(5000)
+		assert.equals(5000,cuentaCorriente.saldo())
+	}
+}
+
+describe "Cuenta con gastos"{
+	
+	test "Si deposito 10000 saldo=9800"{
+		cuentaConGastos.depositar(10000)
+		assert.equals(9800,cuentaConGastos.saldo())
+	}
+	test "Si deposito 10000 y retiro 5000 saldo=5000"{
+		cuentaConGastos.depositar(10200)
+		cuentaConGastos.extraer(5000)
+		assert.equals(4800,cuentaConGastos.saldo())
+	}
+	test "Si deposito 30000 y retiro 20000 saldo=9600"{
+		cuentaConGastos.depositar(30200)
+		cuentaConGastos.extraer(20000)
+		assert.equals(9600,cuentaConGastos.saldo())
+	}
+}
+
+describe "Cuenta combinada"{
+	test"Saldo total"{
+		cuentaCorriente.depositar(30000)
+		cuentaConGastos.depositar(2000200)
+		assert.equals(2030000,cuentaCombinada.saldo())	
+	}
+	test "Deposito en la cuenta combinada y aumenta el saldo de la cuenta corriente"{
+		cuentaCorriente.depositar(30000)
+		cuentaCombinada.depositar(10000)
+		assert.equals(40000,cuentaCorriente.saldo())
+	}
+	test "Importe mayor al saldo de cuenta principal, extrae de cuenta secundaria"{
+		cuentaConGastos.depositar(30200)
+		cuentaCombinada.extraer1(20000)
+		assert.equals(9600,cuentaConGastos.saldo())
+	}
+	test"Si el saldo es mayor al saldo de la cuenta primaria, la deja en cero"{
+		cuentaCorriente.depositar(2000)
+		cuentaConGastos.depositar(3200)
+		cuentaCombinada.extraer(2500)
+		assert.equals(0,cuentaCorriente.saldo())
+	} 
+		test"Si el saldo es mayor al saldo de la cuenta primaria, saca la diferencia de la cuenta secundaria"{
+		cuentaCorriente.depositar(2000)
+		cuentaConGastos.depositar(3200)
+		cuentaCombinada.extraer(3000)
+		assert.equals(1800,cuentaConGastos.saldo())
+	} 
+}
